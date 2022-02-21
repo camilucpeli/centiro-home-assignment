@@ -12,16 +12,9 @@ namespace CentiroHomeAssignment.Tests
     class CSVFileReaderTests
     {
         [Test]
-        [TestCase()]
-        public void ParseOrderDTO(string row, Dictionary<int, string> orderColumnDictionary)
-        {
-            throw new NotImplementedException();
-        }
-
-        [Test]
         [TestCase("OrderNumber", "17890", @"{'OrderNumber': 17890}")]
         [TestCase("OrderLineNumber", "3", @"{'OrderLineNumber': 3}")]
-        [TestCase("OrderDate", "25-01-14", @"{'OrderDate': 25-01-14}")]
+        [TestCase("OrderDate", "25-01-2014", @"{'OrderDate': '25-Jan-14 12:00:00 AM'}")]
         [TestCase("Quantity", "5", @"{'Quantity': 5}")]
         [TestCase("Name", "Small House", @"{'ProductName': 'Small House'}")]
         [TestCase("Description", "something", @"{'Description': 'something'}")]
@@ -30,7 +23,7 @@ namespace CentiroHomeAssignment.Tests
         [TestCase("ProductGroup", "Normal", @"{'ProductGroup': 'Normal'}")]
         public void SetValueTest(string columnName, string value, string orderDTOTxt)
         {
-            CSVFileReader csv = new CSVFileReader();
+            var csv = new CSVFileReader();
 
             var orderDTO = new OrderDTO();
 

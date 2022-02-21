@@ -1,3 +1,4 @@
+using System;
 using CentiroHomeAssignment.Controllers;
 using CentiroHomeAssignment.DataReader;
 using CentiroHomeAssignment.HostedServices;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace CentiroHomeAssignment
 {
@@ -35,7 +37,11 @@ namespace CentiroHomeAssignment
 
             services.AddHostedService<OrdersFileWatcherHostedService>();
 
+
+            services.AddSwaggerGen();
+
             services.AddControllersWithViews();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +60,12 @@ namespace CentiroHomeAssignment
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Centiro Home Assignment API V1");
+            });
 
             app.UseRouting();
 

@@ -32,6 +32,15 @@ namespace CentiroHomeAssignment.Repositories
             modelBuilder.Entity<OrderDetail>()
                 .Property(orderDetail => orderDetail.OrderDetailNumber)
                 .ValueGeneratedOnAdd();
+            modelBuilder.Entity<Order>()
+                .Property(order => order.OrderNumber)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<Product>()
+                .Property(product => product.ProductNumber)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<Customer>()
+                .Property(customer => customer.CustomerNumber)
+                .ValueGeneratedOnAdd();
 
 
 
