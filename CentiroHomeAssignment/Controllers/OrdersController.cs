@@ -1,22 +1,30 @@
-﻿using System;
+﻿using CentiroHomeAssignment.Models;
+using CentiroHomeAssignment.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CentiroHomeAssignment.Controllers
 {
     public class OrdersController : Controller
     {
-        public IActionResult GetAll()
+        private OrdersService _service { get; set; }
+        
+        public OrdersController(OrdersService service)
         {
-            // TODO: Return all orders to a view
-
-            throw new NotImplementedException();
+            _service = service;
         }
 
-        public IActionResult GetByOrderNumber(string orderNumber)
-        {
-            // TODO: Return the specific order to a view
 
-            throw new NotImplementedException();
+        public async Task<IEnumerable<Order>> GetAllAsync()
+        {
+            return await _service.GetAllOrdersAsync();
         }
+
+        public async Task<Order> GetByOrderNumber(string orderNumber)
+        {
+            return await _service.GetOrderByIdAsync(orderNumber);
+        }
+
     }
 }
