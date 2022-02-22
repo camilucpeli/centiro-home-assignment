@@ -61,7 +61,7 @@ namespace CentiroHomeAssignment.DataReader
         {
             var orderDTO = new OrderDTO();
             var values = row.Split("|");
-            for (int i = 0; i < values.Length; i++)
+            for (var i = 0; i < values.Length; i++)
             {
                 SetValue(orderColumnDictionary[i], values[i], orderDTO);
             }

@@ -41,5 +41,10 @@ namespace CentiroHomeAssignment.Controllers
         {
             throw new System.NotImplementedException();
         }
+
+        public IActionResult Create()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
