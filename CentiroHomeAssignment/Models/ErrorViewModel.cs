@@ -1,5 +1,3 @@
-using System;
-
 namespace CentiroHomeAssignment.Models
 {
     public class ErrorViewModel

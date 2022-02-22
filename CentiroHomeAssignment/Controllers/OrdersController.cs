@@ -1,22 +1,50 @@
-﻿using System;
+﻿using CentiroHomeAssignment.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace CentiroHomeAssignment.Controllers
 {
+    [Route("api/Orders")]
+    [ApiController]
     public class OrdersController : Controller
     {
-        public IActionResult GetAll()
+        private OrdersService _service { get; set; }
+        
+        public OrdersController(OrdersService service)
         {
-            // TODO: Return all orders to a view
-
-            throw new NotImplementedException();
+            _service = service;
         }
 
-        public IActionResult GetByOrderNumber(string orderNumber)
+        // GET: api/Orders
+        [HttpGet("~/orders")]
+        public async Task<IActionResult> GetAllAsync()
         {
-            // TODO: Return the specific order to a view
+            var orders = await _service.GetAllOrdersAsync();
 
-            throw new NotImplementedException();
+            return View(orders);
+        }
+
+        // GET: api/Orders/2
+        [HttpGet("~/orders/GetByOrderNumber/{orderNumber}")]
+        public async Task<IActionResult> GetByOrderNumber(int orderNumber)
+        {
+            var order = await _service.GetOrderByIdAsync(orderNumber);
+            return View(order);
+        }
+
+        public IActionResult Edit()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IActionResult Delete()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IActionResult Create()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
