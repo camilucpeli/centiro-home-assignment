@@ -25,9 +25,8 @@ namespace CentiroHomeAssignment.Services
         public async Task InsertOrdersDTOs(List<OrderDTO> ordersDTOs)
         {
             var orderDTOsGroups = ordersDTOs.GroupBy(order => order.OrderNumber).ToList();
-            foreach (var orderDTOGroup in orderDTOsGroups)
+            foreach (var orderDTOList in orderDTOsGroups.Select(orderDTOGroup => orderDTOGroup.Select(o => o).ToList()))
             {
-                var orderDTOList = orderDTOGroup.Select(o => o).ToList();
                 await InsertOrderDTO(orderDTOList);
             }
         }
@@ -51,7 +50,8 @@ namespace CentiroHomeAssignment.Services
                     ProductName = orderDTO.ProductName,
                     ProductNumber = orderDTO.ProductNumber,
                     Description = orderDTO.Description,
-                    Price = orderDTO.Price
+                    Price = orderDTO.Price,
+                    ProductGroup = orderDTO.ProductGroup
                 };
 
                 if(!products.Contains(product)) products.Add(product);

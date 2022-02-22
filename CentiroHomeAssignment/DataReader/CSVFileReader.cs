@@ -1,7 +1,6 @@
 ﻿using CentiroHomeAssignment.DTOs;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -94,7 +93,7 @@ namespace CentiroHomeAssignment.DataReader
                         orderDTO.Description = value;
                         break;
                     case OrderDTOColumns.Price:
-                        orderDTO.Price = double.Parse(value);
+                        orderDTO.Price = decimal.Parse(value);
                         break;
                     case OrderDTOColumns.ProductGroup:
                         orderDTO.ProductGroup = value;

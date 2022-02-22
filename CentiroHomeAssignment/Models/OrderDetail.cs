@@ -14,5 +14,6 @@ namespace CentiroHomeAssignment.Models
         public int OrderLineNumber { get; set; }
         [Required]
         public int Quantity { get; set; }
+
     }
 }

@@ -1,5 +1,3 @@
-using System;
-using CentiroHomeAssignment.Controllers;
 using CentiroHomeAssignment.DataReader;
 using CentiroHomeAssignment.HostedServices;
 using CentiroHomeAssignment.Repositories;
@@ -10,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 
 namespace CentiroHomeAssignment
 {
@@ -27,8 +24,11 @@ namespace CentiroHomeAssignment
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<CentiroHomeAssignmentContext>(opt =>
-                opt.UseInMemoryDatabase(databaseName: "CentiroHomeAssignment"));
-            services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+            {
+                opt.UseInMemoryDatabase(databaseName: "CentiroHomeAssignment");
+            });
+        services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+            services.AddScoped<OrdersRepository>();
             services.AddSingleton<Settings>();
             services.AddScoped<IFileReader, CSVFileReader>();
 

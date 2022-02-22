@@ -11,6 +11,5 @@ namespace CentiroHomeAssignment.Models
         public List<OrderDetail> OrderDetails { get; set; }
         public DateTime OrderDate { get; set; }
         public Customer Customer { get; set; }
-        
     }
 }

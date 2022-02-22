@@ -1,15 +1,14 @@
 ﻿using CentiroHomeAssignment.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CentiroHomeAssignment.Repositories
 {
     public class CentiroHomeAssignmentContext : DbContext
     {
-        public CentiroHomeAssignmentContext(DbContextOptions<CentiroHomeAssignmentContext> options): base(options) { }
+        public CentiroHomeAssignmentContext(DbContextOptions<CentiroHomeAssignmentContext> options) : base(options)
+        {
+
+        }
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<Customer> Customers { get; set; }
@@ -18,12 +17,12 @@ namespace CentiroHomeAssignment.Repositories
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Order>()
                 .HasMany(order => order.OrderDetails);
-            
+
             modelBuilder.Entity<Order>()
-                .HasOne(order => order.Customer)
-                .WithMany(customer => customer.Orders);
+                .HasOne(order => order.Customer);
 
 
             modelBuilder.Entity<OrderDetail>()

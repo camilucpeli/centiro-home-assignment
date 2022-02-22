@@ -8,9 +8,9 @@ namespace CentiroHomeAssignment.Services
 
     public class OrdersService
     {
-        private IRepository<Order> _repo { get; set; }
+        private OrdersRepository _repo { get; }
 
-        public OrdersService(IRepository<Order> repo)
+        public OrdersService(OrdersRepository repo)
         {
             _repo = repo;
         }
@@ -20,9 +20,10 @@ namespace CentiroHomeAssignment.Services
             return await _repo.GetAllAsync();
         }
 
-        public async Task<Order> GetOrderByIdAsync(string orderNumber)
+        public async Task<Order> GetOrderByIdAsync(int orderNumber)
         {
-            return await _repo.GetByIdAsync(orderNumber);
+            var result = await _repo.GetByIdAsync(orderNumber);
+            return result;
         }
     }
 }

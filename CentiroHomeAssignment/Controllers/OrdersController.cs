@@ -1,7 +1,5 @@
-﻿using CentiroHomeAssignment.Models;
-using CentiroHomeAssignment.Services;
+﻿using CentiroHomeAssignment.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CentiroHomeAssignment.Controllers
@@ -19,17 +17,29 @@ namespace CentiroHomeAssignment.Controllers
 
         // GET: api/Orders
         [HttpGet("~/orders")]
-        public async Task<IEnumerable<Order>> GetAllAsync()
+        public async Task<IActionResult> GetAllAsync()
         {
-            return await _service.GetAllOrdersAsync();
+            var orders = await _service.GetAllOrdersAsync();
+
+            return View(orders);
         }
 
         // GET: api/Orders/2
-        [HttpGet("{orderNumber}")]
-        public async Task<Order> GetByOrderNumber(string orderNumber)
+        [HttpGet("~/orders/GetByOrderNumber/{orderNumber}")]
+        public async Task<IActionResult> GetByOrderNumber(int orderNumber)
         {
-            return await _service.GetOrderByIdAsync(orderNumber);
+            var order = await _service.GetOrderByIdAsync(orderNumber);
+            return View(order);
         }
 
+        public IActionResult Edit()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IActionResult Delete()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

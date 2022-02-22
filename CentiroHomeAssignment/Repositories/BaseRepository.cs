@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,30 +16,30 @@ namespace CentiroHomeAssignment.Repositories
         private DbSet<T> _dbSet { get; set; }
 
 
-        public Task DeleteAsync(T value)
+        public virtual Task DeleteAsync(T value)
         {
             _dbSet.Remove(value);
             return _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(object id)
+        public virtual async Task<T> GetByIdAsync(object id)
         {
-            return await _dbSet.FindAsync(id);
+            return await _context.FindAsync<T>(id);
         }
 
 
-        public async Task InsertAsync(T value)
+        public virtual async Task InsertAsync(T value)
         {
             await _dbSet.AddAsync(value);
             await _context.SaveChangesAsync();
         }
 
-        public Task UpdateAsync(T value)
+        public virtual Task UpdateAsync(T value)
         {
             _dbSet.Update(value);
             return _context.SaveChangesAsync();

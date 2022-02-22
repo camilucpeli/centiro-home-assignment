@@ -1,0 +1,63 @@
+﻿@using Microsoft.EntityFrameworkCore
+@model Order
+
+@{
+    ViewBag.Title = "Order";
+    Layout = "_Layout";
+}
+
+<b>@Html.DisplayNameFor(model => model.OrderNumber):</b> @Html.DisplayFor(model => model.OrderNumber)
+<br />
+<b>@Html.DisplayNameFor(model => model.Customer):</b> @Html.DisplayFor(model => model.Customer.CustomerNumber) - @Html.DisplayFor(model => model.Customer.CustomerName)
+<br />
+<b>@Html.DisplayNameFor(model => model.OrderDate):</b> @Html.DisplayFor(model => model.OrderDate)
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Order Line Number
+            </th>
+            <th>
+                Product Number
+            </th>
+            <th>
+                Product Name
+            </th>
+            <th>
+                Description
+            </th> 
+            <th>
+                Product Group
+            </th> 
+            <th>
+                Price
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (OrderDetail orderDetail in Model.OrderDetails.OrderBy(o => o.OrderLineNumber).ToList())
+        {
+            <tr>
+                <td>
+                    @orderDetail.OrderLineNumber
+                </td>
+                <td>
+                    @orderDetail.Product.ProductNumber
+                </td>
+                <td>
+                    @orderDetail.Product.ProductName
+                </td>
+                <td>
+                    @orderDetail.Product.Description
+                </td>
+                <td>
+                    @orderDetail.Product.ProductGroup
+                </td>
+                <td>
+                    @orderDetail.Product.Price
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
